@@ -53,14 +53,14 @@ export function HeroSection({ onRegisterClick }: HeroSectionProps) {
 					</p>
 					<div className="h-px w-12 bg-[#f57c00] hero-line mb-10" />
 					<h1
-						className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl text-white leading-[1.08] tracking-tight animate-in fade-in"
+						className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl text-white leading-[1.08] tracking-tight animate-in fade-in"
 						style={{
 							animationDelay: "150ms",
 							animationFillMode: "backwards",
 						}}
 					>
-						Dunyoning Eng Yaxshi{""}
-						<span className="text-[#f57c00] italic">
+						Dunyoning Eng Yaxshi{" "}
+						<span className="text-[#f57c00]">
 							Universitetlariga Kirish
 						</span>
 					</h1>

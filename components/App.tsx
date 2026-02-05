@@ -1,12 +1,31 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { Logo } from "./Logo";
 import { RegistrationForm } from "./Form";
 import { HeroSection } from "./HeroSection";
 import { COUNTRIES } from "@/constants";
 import { CountryData } from "@/types";
 import Header from "./header";
+
+const SOCIAL_LINKS = [
+	{
+		name: "Instagram",
+		href: "https://instagram.com/polyglot_consulting",
+		icon: "instagram",
+	},
+	{
+		name: "Telegram",
+		href: "https://t.me/Polyglot_Consulting",
+		icon: "telegram",
+	},
+	{
+		name: "Telegram kanal",
+		href: "https://t.me/Polyglot_Consulting_Agency",
+		icon: "telegram",
+	},
+];
 
 export default function HomePage() {
 	const [selectedCountry, setSelectedCountry] = useState<CountryData>(
@@ -37,7 +56,9 @@ export default function HomePage() {
 		<div className="min-h-screen selection:bg-orange-200" id="home">
 			<HeroSection
 				onRegisterClick={() => {
-					document.getElementById("register")?.scrollIntoView({ behavior: "smooth" });
+					document
+						.getElementById("register")
+						?.scrollIntoView({ behavior: "smooth" });
 					setIsMenuOpen(false);
 				}}
 			/>
@@ -390,24 +411,38 @@ export default function HomePage() {
 								eshigingiz.
 							</p>
 							<div className="flex gap-4">
-								{[
-									"Instagram",
-									"Telegram",
-									"Facebook",
-									"LinkedIn",
-								].map((social) => (
+								{SOCIAL_LINKS.map(({ name, href, icon }) => (
 									<a
-										key={social}
-										href="#register"
-										onClick={(e) =>
-											handleSmoothScroll(e, "register")
-										}
-										className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center hover:bg-[#1a237e] hover:text-white transition-all"
+										key={name}
+										href={href}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center hover:bg-[#1a237e] hover:text-white transition-all text-slate-600"
+										aria-label={name}
 									>
-										<span className="sr-only">
-											{social}
-										</span>
-										<div className="w-6 h-6 bg-current opacity-20 rounded-full"></div>
+										{icon === "instagram" ? (
+											<svg
+												className="w-6 h-6"
+												fill="currentColor"
+												viewBox="0 0 24 24"
+												aria-hidden="true"
+											>
+												<path
+													fillRule="evenodd"
+													d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.218 4.771 1.401 4.771 4.549 0 3.281-1.726 4.864-4.771 4.864-3.204 0-3.584-.012-4.85-.07-3.26-.218-4.771-1.416-4.771-4.549 0-3.28 1.726-4.864 4.771-4.864zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.273 6.468v11.064c0 3.777 2.422 6.196 6.78 6.396C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.947-.072 3.26-.2 6.78-2.418 6.78-6.396V6.468c0-3.777-2.422-6.196-6.78-6.396C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"
+													clipRule="evenodd"
+												/>
+											</svg>
+										) : (
+											<svg
+												className="w-6 h-6"
+												fill="currentColor"
+												viewBox="0 0 24 24"
+												aria-hidden="true"
+											>
+												<path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+											</svg>
+										)}
 									</a>
 								))}
 							</div>
@@ -542,11 +577,14 @@ export default function HomePage() {
 									Bog&apos;lanish
 								</h5>
 								<div className="bg-slate-50 p-6 rounded-[2rem] space-y-4">
-									<div className="font-black text-slate-900">
-										+998 71 200 00 00
-									</div>
+									<a
+										href="tel:+998917083222"
+										className="font-black text-slate-900"
+									>
+										+998 91 708 32 22
+									</a>
 									<div className="text-sm font-semibold text-slate-500">
-										Toshkent sh., Yunusobod tumani
+										Samarkand shahar, Gagarin 150
 									</div>
 								</div>
 							</div>
@@ -555,24 +593,22 @@ export default function HomePage() {
 
 					<div className="pt-12 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-400 text-xs font-bold uppercase tracking-widest">
 						<p>
-							© 2024 Polyglot Consulting. Barcha ma&apos;lumotlar
+							© 2026 Polyglot Consulting. Barcha ma&apos;lumotlar
 							ushbu sahifada.
 						</p>
 						<div className="flex gap-8">
-							<a
-								href="#home"
-								onClick={(e) => handleSmoothScroll(e, "home")}
+							<Link
+								href="/privacy"
 								className="hover:text-slate-900"
 							>
-								Privacy Policy
-							</a>
-							<a
-								href="#home"
-								onClick={(e) => handleSmoothScroll(e, "home")}
+								Maxfiylik siyosati
+							</Link>
+							<Link
+								href="/terms"
 								className="hover:text-slate-900"
 							>
-								Terms of Service
-							</a>
+								Foydalanish shartlari
+							</Link>
 						</div>
 					</div>
 				</div>

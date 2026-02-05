@@ -1,5 +1,5 @@
-
 import React, { useState } from 'react';
+import Link from 'next/link';
 
 export const RegistrationForm: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -127,6 +127,17 @@ export const RegistrationForm: React.FC = () => {
             {loading ? 'Yuborilmoqda…' : 'YUBORISH'}
             {!loading && <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>}
           </button>
+          <p className="text-center text-slate-400 text-xs leading-relaxed pt-1">
+            Ariza yuborish orqali siz{' '}
+            <Link href="/terms" className="text-slate-600 hover:text-[#1a237e] underline underline-offset-2">
+              foydalanish shartlari
+            </Link>
+            {' '}va{' '}
+            <Link href="/privacy" className="text-slate-600 hover:text-[#1a237e] underline underline-offset-2">
+              maxfiylik siyosati
+            </Link>
+            ga rozi ekanligingizni bildirasiz.
+          </p>
         </form>
       </div>
     </div>
