@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Logo } from "./Logo";
 import { RegistrationForm } from "./Form";
+import { HeroSection } from "./HeroSection";
 import { COUNTRIES } from "@/constants";
 import { CountryData } from "@/types";
 import Header from "./header";
@@ -34,78 +35,12 @@ export default function HomePage() {
 
 	return (
 		<div className="min-h-screen selection:bg-orange-200" id="home">
-			{/* hero section — editorial split */}
-			<section className="relative min-h-screen flex flex-col lg:flex-row overflow-hidden bg-[#0c0a14]">
-				{/* left: content panel */}
-				<div className="relative z-10 flex flex-1 flex-col justify-center px-6 sm:px-10 lg:px-16 xl:px-24 pt-28 pb-16 lg:py-0 lg:min-h-screen">
-					<div className="max-w-xl">
-						<p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-slate-500 mb-8 animate-in fade-in">
-							Xalqaro Ta&apos;lim Agentligi
-						</p>
-						<div className="h-px w-12 bg-[#f57c00] hero-line mb-10" />
-						<h1
-							className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl text-white leading-[1.08] tracking-tight animate-in fade-in"
-							style={{
-								animationDelay: "150ms",
-								animationFillMode: "backwards",
-							}}
-						>
-							Global Kelajakingizni{" "}
-							<span className="text-[#f57c00] italic">
-								Bugun Quring.
-							</span>
-						</h1>
-						<p
-							className="mt-8 text-slate-400 text-base sm:text-lg leading-relaxed max-w-md animate-in fade-in"
-							style={{
-								animationDelay: "300ms",
-								animationFillMode: "backwards",
-							}}
-						>
-							600+ nufuzli universitetlar, 10+ davlatlar va 100%
-							viza yordami. Sizning talabalik orzuingiz bizning
-							ustuvor vazifamizdir.
-						</p>
-						<div
-							className="mt-12 flex flex-wrap items-center gap-6 animate-in fade-in"
-							style={{
-								animationDelay: "450ms",
-								animationFillMode: "backwards",
-							}}
-						>
-							<a
-								href="#register"
-								onClick={(e) =>
-									handleSmoothScroll(e, "register")
-								}
-								className="group inline-flex items-center gap-2 text-white font-semibold text-sm uppercase tracking-widest hover:text-[#f57c00] transition-colors"
-							>
-								Bepul maslahat
-								<span className="inline-block w-8 h-px bg-current group-hover:w-12 transition-all duration-300" />
-							</a>
-							<span className="text-slate-600 text-sm font-medium">
-								1000+ muvaffaqiyatli arizalar
-							</span>
-						</div>
-					</div>
-				</div>
-
-				{/* right: image panel */}
-				<div className="relative flex-1 min-h-[50vh] lg:min-h-screen">
-					<div
-						className="hero-image-reveal absolute inset-0 bg-cover bg-center bg-no-repeat"
-						style={{
-							backgroundImage: `url('https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=85')`,
-						}}
-					/>
-					{/* edge fade into left panel */}
-					<div
-						className="absolute inset-0 lg:left-0 lg:w-32 bg-gradient-to-r from-[#0c0a14] to-transparent pointer-events-none"
-						aria-hidden
-					/>
-				</div>
-			</section>
-			{/* end hero section */}
+			<HeroSection
+				onRegisterClick={() => {
+					document.getElementById("register")?.scrollIntoView({ behavior: "smooth" });
+					setIsMenuOpen(false);
+				}}
+			/>
 			<div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
 				<div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-blue-100 rounded-full blur-[120px] opacity-30 animate-pulse"></div>
 				<div className="absolute bottom-[-5%] right-[-5%] w-[30%] h-[40%] bg-orange-100 rounded-full blur-[100px] opacity-20"></div>
@@ -132,9 +67,10 @@ export default function HomePage() {
 								</span>
 							</h1>
 							<p className="text-xl text-slate-600 mb-10 leading-relaxed max-w-xl">
-								600+ nufuzli universitetlar, 10+ davlatlar va
-								100% viza yordami. Sizning talabalik orzuingiz
-								bizning ustuvor vazifamizdir.
+								Ushbu yilning eng yuqori reytingiga ega
+								universitetlarga kirishga yordam beramiz. Siz
+								uchun eng yaxshi tanlovni tanlaydi va barcha
+								jarayonni osonlashtira olaman.
 							</p>
 
 							<div className="flex flex-col sm:flex-row gap-5 items-start sm:items-center">

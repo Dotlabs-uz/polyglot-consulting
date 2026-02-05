@@ -90,3 +90,19 @@ body {
   animation: heroLine 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
   transform-origin: top;
 }
+
+/* Hero carousel crossfade */
+.hero-slide {
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hero-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.hero-slide:not(.active) {
+  opacity: 0;
+  pointer-events: none;
+}
+.hero-progress-bar {
+  min-width: 0;
+}
