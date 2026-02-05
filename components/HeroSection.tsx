@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-
+// https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=85
 const HERO_IMAGES = [
-	"https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=85",
-	"https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=85",
-	"https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=85",
+	"/first.jpeg",
+	"/second.jpeg",
+	"/third.jpeg",
 	"https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=85",
 ];
 const HERO_INTERVAL_MS = 5500;
@@ -71,9 +71,9 @@ export function HeroSection({ onRegisterClick }: HeroSectionProps) {
 							animationFillMode: "backwards",
 						}}
 					>
-						600+ nufuzli universitetlar, 10+ davlatlar va 100%
-						viza yordami. Sizning talabalik orzuingiz bizning
-						ustuvor vazifamizdir.
+						600+ nufuzli universitetlar, 10+ davlatlar va 100% viza
+						yordami. Sizning talabalik orzuingiz bizning ustuvor
+						vazifamizdir.
 					</p>
 					<div
 						className="mt-12 flex flex-wrap items-center gap-6 animate-in fade-in"
