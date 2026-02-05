@@ -1,11 +1,17 @@
 import type { Metadata } from 'next';
-import { Plus_Jakarta_Sans } from 'next/font/google';
+import { Plus_Jakarta_Sans, Instrument_Serif } from 'next/font/google';
 import './globals.css';
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800'],
   variable: '--font-plus-jakarta',
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-instrument-serif',
 });
 
 export const metadata: Metadata = {
@@ -20,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="uz" className="scroll-smooth">
-      <body className={`${plusJakarta.variable} font-sans text-slate-900 overflow-x-hidden antialiased`}>
+      <body className={`${plusJakarta.variable} ${instrumentSerif.variable} font-sans text-slate-900 overflow-x-hidden antialiased`}>
         {children}
       </body>
     </html>
