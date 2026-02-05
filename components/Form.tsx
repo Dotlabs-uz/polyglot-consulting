@@ -10,10 +10,30 @@ export const RegistrationForm: React.FC = () => {
     address: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Lead captured:', formData);
-    setSubmitted(true);
+    setError(null);
+    setLoading(true);
+    try {
+      const res = await fetch('/api/apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setError(data.error || 'Xatolik yuz berdi. Qaytadan urinib ko\'ring.');
+        return;
+      }
+      setSubmitted(true);
+    } catch {
+      setError('Internet aloqasi xatosi. Qaytadan urinib ko\'ring.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
@@ -42,6 +62,11 @@ export const RegistrationForm: React.FC = () => {
         <h3 className="text-3xl font-black mb-2 text-slate-900">Ariza Topshiring</h3>
         <p className="text-slate-400 mb-8 font-semibold text-sm">Biz sizga 24 soat ichida javob beramiz.</p>
         
+        {error && (
+          <div className="mb-6 p-4 rounded-2xl bg-red-50 border border-red-100 text-red-700 text-sm font-semibold">
+            {error}
+          </div>
+        )}
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-1.5">
             <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-4">To'liq Ismingiz</label>
@@ -95,11 +120,12 @@ export const RegistrationForm: React.FC = () => {
           </div>
           
           <button 
-            type="submit" 
-            className="w-full bg-slate-900 hover:bg-[#1a237e] text-white font-black py-5 rounded-[1.5rem] shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3"
+            type="submit"
+            disabled={loading}
+            className="w-full bg-slate-900 hover:bg-[#1a237e] disabled:opacity-70 disabled:cursor-not-allowed text-white font-black py-5 rounded-[1.5rem] shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3"
           >
-            YUBORISH
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            {loading ? 'Yuborilmoqda…' : 'YUBORISH'}
+            {!loading && <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>}
           </button>
         </form>
       </div>
