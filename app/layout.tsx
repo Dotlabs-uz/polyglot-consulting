@@ -14,9 +14,34 @@ const instrumentSerif = Instrument_Serif({
   variable: '--font-instrument-serif',
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+
 export const metadata: Metadata = {
   title: "Polyglot Consulting - Global Ta'lim Agentligi",
   description: "Xalqaro ta'lim agentligi - 600+ universitetlar, 10+ davlatlar, viza yordami",
+  ...(siteUrl && { metadataBase: new URL(siteUrl) }),
+  openGraph: {
+    title: "Polyglot Consulting - Global Ta'lim Agentligi",
+    description: "Xalqaro ta'lim agentligi - 600+ universitetlar, 10+ davlatlar, viza yordami",
+    siteName: "Polyglot Consulting",
+    locale: "uz_UZ",
+    type: "website",
+    images: [
+      {
+        url: "/first.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Polyglot Consulting - Chet elda o'qish agentligi",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Polyglot Consulting - Global Ta'lim Agentligi",
+    description: "Xalqaro ta'lim agentligi - 600+ universitetlar, 10+ davlatlar, viza yordami",
+    images: ["/first.jpeg"],
+  },
+  robots: "index, follow",
 };
 
 export default function RootLayout({
