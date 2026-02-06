@@ -41,6 +41,7 @@ export type ApplyBody = {
   fullName: string;
   phone: string;
   englishLevel: string;
+  studyLevel: string;
   address: string;
 };
 
@@ -69,6 +70,9 @@ const ALLOWED_ENGLISH_LEVELS = [
   'IELTS 7.5+',
 ];
 
+/** Допустимые значения таълим бошқичи */
+const ALLOWED_STUDY_LEVELS = ['Bakalavr', 'Magistratura', 'Foundation'];
+
 /** Слова/фразы, при наличии которых заявку отклоняем (можно расширить через env) */
 const BLOCKLIST = (process.env.APPLY_BLOCKLIST ?? '')
   .toLowerCase()
@@ -89,6 +93,7 @@ function buildTelegramMessage(data: ApplyBody): string {
     `👤 Ism: ${data.fullName}`,
     `📱 Telefon: ${data.phone}`,
     `📚 Ingliz tili: ${data.englishLevel}`,
+    `🎓 Ta'lim bosqichi: ${data.studyLevel}`,
     `📍 Manzil: ${data.address}`,
     '',
     new Date().toLocaleString('uz-UZ'),
@@ -127,7 +132,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
   }
 
-  const { fullName, phone, englishLevel, address } = body;
+  const { fullName, phone, englishLevel, studyLevel, address } = body;
   if (!fullName?.trim() || !phone?.trim() || !address?.trim()) {
     return NextResponse.json(
       { error: 'fullName, phone and address are required' },
@@ -139,6 +144,7 @@ export async function POST(request: NextRequest) {
     fullName: sanitizeText(fullName),
     phone: sanitizePhone(phone),
     englishLevel: (englishLevel || '').trim(),
+    studyLevel: (studyLevel || '').trim(),
     address: sanitizeText(address),
   };
 
@@ -163,6 +169,13 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  if (!ALLOWED_STUDY_LEVELS.includes(sanitized.studyLevel)) {
+    return NextResponse.json(
+      { error: 'Ta\'lim bosqichini ro\'yxatdan tanlang.' },
+      { status: 400 }
+    );
+  }
+
   if (
     containsBlocklisted(sanitized.fullName) ||
     containsBlocklisted(sanitized.address)
@@ -177,6 +190,7 @@ export async function POST(request: NextRequest) {
     sanitized.fullName.length > MAX_FIELD_LENGTH ||
     sanitized.phone.length > MAX_FIELD_LENGTH ||
     sanitized.englishLevel.length > MAX_FIELD_LENGTH ||
+    sanitized.studyLevel.length > MAX_FIELD_LENGTH ||
     sanitized.address.length > MAX_FIELD_LENGTH
   ) {
     return NextResponse.json(

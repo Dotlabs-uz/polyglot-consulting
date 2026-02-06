@@ -7,6 +7,7 @@ export const RegistrationForm: React.FC = () => {
     fullName: '',
     phone: '',
     englishLevel: 'IELTS 5.5 - 6.0',
+    studyLevel: 'Bakalavr' as 'Bakalavr' | 'Magistratura' | 'Foundation',
     address: ''
   });
 
@@ -104,6 +105,19 @@ export const RegistrationForm: React.FC = () => {
               <option>IELTS 5.5 - 6.0</option>
               <option>IELTS 6.5 - 7.0</option>
               <option>IELTS 7.5+</option>
+            </select>
+          </div>
+
+          <div className="space-y-1.5">
+            <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-4">Ta&apos;lim bosqichi</label>
+            <select 
+              className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100 transition-all text-sm font-semibold appearance-none cursor-pointer"
+              value={formData.studyLevel}
+              onChange={e => setFormData({...formData, studyLevel: e.target.value as 'Bakalavr' | 'Magistratura' | 'Foundation'})}
+            >
+              <option value="Bakalavr">Bakalavr</option>
+              <option value="Magistratura">Magistratura</option>
+              <option value="Foundation">Foundation</option>
             </select>
           </div>
           
